@@ -186,7 +186,10 @@ class Protocol:
                 # exceptions because of fragmented messages (broken or invalid messages might still be sent tough)
                 self.log("error", "Exception in deserialization of BSON")
         else:
-            msg = self.incoming_json(message_string.decode().strip(''))
+            if isinstance(message_string, bytes):
+                msg = self.incoming_json(message_string.decode().strip(''))
+            else:
+                msg = self.incoming_json(message_string.strip(''))
 
         # if decoding of buffer failed .. simply return
         if msg is None:
