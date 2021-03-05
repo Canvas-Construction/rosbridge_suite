@@ -163,6 +163,9 @@ if __name__ == "__main__":
                 else:
                     print("--unregister_timeout argument provided without a value.")
                     sys.exit(-1)
+            
+            if "--bson_only_mode" in sys.argv:
+                bson_only_mode = True
 
             # export parameters to handler class
             RosbridgeTcpSocket.incoming_buffer = incoming_buffer
@@ -209,9 +212,6 @@ if __name__ == "__main__":
                 else:
                     print("--params_glob argument provided without a value. (can be None or a list)")
                     sys.exit(-1)
-
-            if "--bson_only_mode" in sys.argv:
-                bson_only_mode = True
 
             # To be able to access the list of topics and services, you must be able to access the rosapi services.
             if RosbridgeTcpSocket.services_glob:
